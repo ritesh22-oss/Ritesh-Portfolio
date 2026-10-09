@@ -1,7 +1,7 @@
 import { Suspense, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Canvas } from "@react-three/fiber";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 // components
 import { Loader, Alert } from "../components";
@@ -104,23 +104,26 @@ const Contact = () => {
       </Helmet>
 
       {/* contact section */}
-      <section className="relative flex lg:flex-row flex-col max-container lg:h-screen">
+      <section className="relative flex lg:flex-row flex-col max-container min-h-[calc(100vh-80px)] lg:h-auto gap-8 sm:gap-12 pb-16">
         {/* show alert on form submit */}
         {alert.show && <Alert {...alert} />}
 
         {/* get in touch */}
-        <div className="flex-1 min-w-[50%] flex flex-col">
+        <div className="flex-1 min-w-[50%] flex flex-col justify-center">
           {/* head text */}
           <h1 className="head-text">Get in Touch</h1>
+          <p className="mt-3 text-slate-500 text-sm sm:text-base">
+            Have a project or want to collaborate? Send a message and let&apos;s connect!
+          </p>
 
           {/* contact form */}
           <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="w-full flex flex-col gap-7 mt-14"
+            className="w-full flex flex-col gap-5 sm:gap-7 mt-8 sm:mt-12 bg-white/70 p-5 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm"
           >
             {/* name */}
-            <label className="text-black-500 font-semibold" htmlFor="name">
+            <label className="text-slate-800 text-sm sm:text-base font-semibold" htmlFor="name">
               Name
               <input
                 type="text"
@@ -139,7 +142,7 @@ const Contact = () => {
             </label>
 
             {/* email */}
-            <label className="text-black-500 font-semibold" htmlFor="email">
+            <label className="text-slate-800 text-sm sm:text-base font-semibold" htmlFor="email">
               E-mail
               <input
                 type="email"
@@ -158,7 +161,7 @@ const Contact = () => {
             </label>
 
             {/* message */}
-            <label className="text-black-500 font-semibold" htmlFor="message">
+            <label className="text-slate-800 text-sm sm:text-base font-semibold" htmlFor="message">
               Your Message
               <textarea
                 id="message"
@@ -181,7 +184,7 @@ const Contact = () => {
               type="submit"
               disabled={isLoading}
               title={isLoading ? "Sending..." : "Send Message"}
-              className="btn"
+              className="btn mt-2"
               onFocus={handleFocus}
               onBlur={handleBlur}
             >
@@ -190,7 +193,7 @@ const Contact = () => {
           </form>
         </div>
 
-        <div className="lg:w-1/2 w-full lg:h-auto md:h-p[550px] h-[350px]">
+        <div className="lg:w-1/2 w-full h-[280px] sm:h-[350px] lg:h-auto min-h-[280px] rounded-2xl overflow-hidden bg-slate-200/20 border border-white/50">
           {/* Three.js Canvas Component */}
           <Canvas
             camera={{

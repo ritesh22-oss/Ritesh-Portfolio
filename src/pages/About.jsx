@@ -2,10 +2,10 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 // components
-import { Cta } from "../components";
+import { Cta, GithubStats } from "../components";
 
 // constants
 import { SKILLS, EXPERIENCES, SITE_NAME } from "../constants";
@@ -39,23 +39,23 @@ const About = () => {
         </div>
 
         {/* about skills */}
-        <div className="py-10 flex flex-col">
+        <div className="py-8 sm:py-10 flex flex-col">
           {/* skills head */}
           <h3 className="subhead-text">My Skills</h3>
 
-          {/* skills list */}
-          <div className="mt-16 flex flex-wrap gap-12">
+          {/* skills list: responsive centered grid that balances on 320px to large desktop */}
+          <div className="mt-10 sm:mt-16 flex flex-wrap justify-center sm:justify-start gap-6 sm:gap-10 md:gap-12">
             {/* map over each skill */}
             {SKILLS.map((skill) => (
               <div
-                className="block-container w-20 h-20"
+                className="block-container w-16 h-16 sm:w-20 sm:h-20"
                 key={`skill_${skill.name}`}
               >
                 {/* bg btn */}
                 <div className="btn-back rounded-xl" />
                 {/* skill icon */}
                 <div
-                  className="btn-front rounded-xl flex justify-center items-center"
+                  className="btn-front rounded-xl flex flex-col justify-center items-center shadow-sm"
                   title={skill.name}
                 >
                   <img
@@ -93,8 +93,8 @@ const About = () => {
                       {/* experience icon */}
                       <img
                         src={experience.icon}
-                        alt={experience.company_name}
-                        className="w-[60%] h-[60%] object-contain"
+                        alt={experience.title}
+                        className="w-[58%] h-[58%] object-contain drop-shadow-sm"
                       />
                     </div>
                   }
@@ -102,35 +102,40 @@ const About = () => {
                     background: experience.iconBg,
                   }}
                   contentStyle={{
-                    borderBottom: "8px",
-                    borderStyle: "solid",
-                    borderBottomColor: experience.iconBg,
-                    boxShadow: "none",
+                    background: "#ffffff",
+                    borderBottom: `4px solid ${experience.iconBg || "#3b82f6"}`,
+                    boxShadow: "0 4px 20px -2px rgba(0, 0, 0, 0.06)",
+                    borderRadius: "1rem",
+                    padding: "1.25rem 1.25rem",
+                  }}
+                  contentArrowStyle={{
+                    borderRight: "7px solid #ffffff",
                   }}
                 >
                   {/* experience info */}
-                  <div>
+                  <div className="border-b border-slate-100 pb-2.5">
                     {/* experience title */}
-                    <h3 className="text-black text-xl font-poppins font-semibold">
+                    <h3 className="text-slate-900 text-lg sm:text-xl font-poppins font-bold tracking-tight">
                       {experience.title}
                     </h3>
 
-                    {/* experience company name */}
+                    {/* experience domain / role scope */}
                     <p
-                      className="text-black-500 font-medium font-base"
+                      className="text-blue-600 font-medium text-xs sm:text-sm mt-1 flex items-center gap-1.5"
                       style={{ margin: 0 }}
                     >
-                      {experience.company_name}
+                      <span className="inline-block w-2 h-2 rounded-full bg-blue-500 shrink-0"></span>
+                      <span>{experience.company_name}</span>
                     </p>
                   </div>
 
                   {/* experience points */}
-                  <ul className="my-5 list-disc ml-5 space-y-2">
+                  <ul className="my-3 sm:my-4 list-disc ml-4 sm:ml-5 space-y-2">
                     {/* map over each experience point */}
                     {experience.points.map((point, i) => (
                       <li
                         key={`Experience_${experience.title}_point_${i + 1}`}
-                        className="text-black-500/50 font-normal pl-1 text-sm"
+                        className="text-slate-600 font-normal pl-0.5 sm:pl-1 text-xs sm:text-sm leading-relaxed"
                       >
                         {point}
                       </li>
@@ -141,6 +146,10 @@ const About = () => {
             </VerticalTimeline>
           </div>
         </div>
+
+        {/* GitHub stats section */}
+        <hr className="border-slate-200" />
+        <GithubStats />
 
         {/* horizontal separator */}
         <hr className="border-slate-200" />

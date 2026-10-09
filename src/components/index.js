@@ -6,6 +6,8 @@ import Cta from "./Cta";
 import HomeInfo from "./HomeInfo";
 import Loader from "./Loader";
 import Navbar from "./Navbar";
+import Testimonials from "./Testimonials";
+import GithubStats from "./GithubStats";
 
 // export components
-export { Alert, Cta, HomeInfo, Loader, Navbar };
+export { Alert, Cta, HomeInfo, Loader, Navbar, Testimonials, GithubStats };

@@ -1,0 +1,16 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M18 20L32 14L46 20" stroke="#4F46E5" stroke-width="2.75" stroke-linecap="round"/>
+  <path d="M18 44L32 50L46 44" stroke="#4F46E5" stroke-width="2.75" stroke-linecap="round"/>
+  <path d="M18 20V44" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M46 20V44" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M18 20L32 32L46 20" stroke="#2563EB" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M18 44L32 32L46 44" stroke="#2563EB" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M32 14V50" stroke="#0284C7" stroke-width="2.75" stroke-linecap="round"/>
+  <circle cx="32" cy="14" r="5" fill="#4F46E5" stroke="#EEF2FF" stroke-width="2"/>
+  <circle cx="18" cy="20" r="5" fill="#2563EB" stroke="#EFF6FF" stroke-width="2"/>
+  <circle cx="46" cy="20" r="5" fill="#2563EB" stroke="#EFF6FF" stroke-width="2"/>
+  <circle cx="32" cy="32" r="6" fill="#0284C7" stroke="#E0F2FE" stroke-width="2"/>
+  <circle cx="18" cy="44" r="5" fill="#2563EB" stroke="#EFF6FF" stroke-width="2"/>
+  <circle cx="46" cy="44" r="5" fill="#2563EB" stroke="#EFF6FF" stroke-width="2"/>
+  <circle cx="32" cy="50" r="5" fill="#4F46E5" stroke="#EEF2FF" stroke-width="2"/>
+</svg>

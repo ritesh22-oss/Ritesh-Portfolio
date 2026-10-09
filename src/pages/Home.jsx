@@ -1,6 +1,6 @@
 import { Suspense, useState, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 // components
 import { Loader, HomeInfo } from "../components";
@@ -26,39 +26,106 @@ const Home = () => {
   // states
   const [isRotating, setIsRotating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
-  const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  const [isPlayingMusic, setIsPlayingMusic] = useState(true);
 
-  // on music state change
+  // Auto-play music on mount with browser autoplay policy handling
   useEffect(() => {
-    let audioRefValue = null;
+    const audio = audioRef.current;
+    if (!audio) return;
 
-    // if music is playing
+    let hasStarted = false;
+
+    // Function to attempt playback
+    const startAudio = () => {
+      if (hasStarted) return;
+      audio
+        .play()
+        .then(() => {
+          hasStarted = true;
+          setIsPlayingMusic(true);
+          // Remove interaction listeners once successfully playing
+          window.removeEventListener("click", startAudio);
+          window.removeEventListener("touchstart", startAudio);
+          window.removeEventListener("keydown", startAudio);
+        })
+        .catch(() => {
+          // If browser blocked immediate unprompted autoplay, wait for first user gesture
+        });
+    };
+
+    // Try starting immediately
+    startAudio();
+
+    // Browser autoplay policy fallback: start as soon as user touches or clicks anywhere
+    window.addEventListener("click", startAudio, { once: true });
+    window.addEventListener("touchstart", startAudio, { once: true });
+    window.addEventListener("keydown", startAudio, { once: true });
+
+    return () => {
+      window.removeEventListener("click", startAudio);
+      window.removeEventListener("touchstart", startAudio);
+      window.removeEventListener("keydown", startAudio);
+    };
+  }, []);
+
+  // On music state toggle
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
     if (isPlayingMusic) {
-      audioRef.current.play();
-      audioRefValue = audioRef.current;
+      audio.play().catch(() => {});
+    } else {
+      audio.pause();
     }
 
-    // pause music
     return () => {
-      if (audioRefValue) audioRefValue?.pause();
+      audio.pause();
     };
   }, [isPlayingMusic]);
 
+  // Dynamic screen dimensions state to handle window resizing / orientation change
+  const [screenSize, setScreenSize] = useState({
+    width: typeof window !== "undefined" ? window.innerWidth : 1200,
+    height: typeof window !== "undefined" ? window.innerHeight : 800,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
+    };
+  }, []);
+
   // Function to adjust island parameters based on screen size
   const adjustIslandForScreenSize = () => {
-    let screenScale = null; // Island scale based on screen size
-    let screenPosition = [0, -6.5, -43]; // Initial island position
-    let rotation = [0.1, 4.7, 0]; // Initial island rotation
+    let screenScale = null;
+    let screenPosition = [0, -6.5, -43];
+    let rotation = [0.1, 4.7, 0];
 
-    // Adjust parameters for smaller screens
-    if (window.innerWidth < 768) {
-      screenScale = [0.9, 0.9, 0.9];
+    // Responsive scaling based on device viewport
+    if (screenSize.width < 440) {
+      // Small mobile phones (320px - 430px)
+      screenScale = [0.65, 0.65, 0.65];
+      screenPosition = [0, -4.5, -43];
+    } else if (screenSize.width < 768) {
+      // Tablets / larger phones
+      screenScale = [0.8, 0.8, 0.8];
+      screenPosition = [0, -5.5, -43];
     } else {
-      // Use default parameters for larger screens
+      // Desktop
       screenScale = [1, 1, 1];
+      screenPosition = [0, -6.5, -43];
     }
 
-    // Return adjusted island parameters
     return [screenScale, screenPosition, rotation];
   };
 
@@ -66,25 +133,23 @@ const Home = () => {
   const adjustPlaneForScreenSize = () => {
     let screenScale, screenPosition;
 
-    // Adjust parameters for smaller screens
-    if (window.innerWidth < 768) {
+    if (screenSize.width < 440) {
+      screenScale = [1.1, 1.1, 1.1];
+      screenPosition = [0, -1.2, 0];
+    } else if (screenSize.width < 768) {
       screenScale = [1.5, 1.5, 1.5];
       screenPosition = [0, -1.5, 0];
     } else {
-      // Use default parameters for larger screens
       screenScale = [3, 3, 3];
       screenPosition = [0, -4, -4];
     }
 
-    // Return adjusted plane parameters
     return [screenScale, screenPosition];
   };
 
-  // Destructuring assignment to get values from adjustIslandForScreenSize
   const [islandScale, islandPosition, islandRotation] =
     adjustIslandForScreenSize();
 
-  // Destructuring assignment to get values from adjustPlaneForScreenSize
   const [planeScale, planePosition] = adjustPlaneForScreenSize();
 
   return (
@@ -95,10 +160,12 @@ const Home = () => {
       </Helmet>
 
       {/* home section */}
-      <section className="w-full h-screen relative">
-        {/* current stage */}
-        <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
-          {currentStage && <HomeInfo currentStage={currentStage} />}
+      <section className="w-full h-screen relative overflow-hidden">
+        {/* current stage info banner */}
+        <div className="absolute top-20 sm:top-28 left-0 right-0 z-20 flex items-center justify-center px-4 pointer-events-none">
+          <div className="pointer-events-auto max-w-lg w-full flex justify-center">
+            {currentStage && <HomeInfo currentStage={currentStage} />}
+          </div>
         </div>
         {/* Three.js Canvas Component */}
         <Canvas

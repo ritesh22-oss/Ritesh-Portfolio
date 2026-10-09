@@ -27,6 +27,13 @@ import snappy from "./snappy.svg";
 import arrow from "./arrow.svg";
 import soundon from "./soundon.png";
 import soundoff from "./soundoff.png";
+import python from "./python.svg";
+import ml from "./ml.svg";
+import expo from "./expo.svg";
+import web from "./web.svg";
+import globe from "./globe.svg";
+import brain from "./brain.svg";
+import linkedin from "./linkedin.svg";
 
 // export icons
 export {
@@ -56,4 +63,11 @@ export {
   arrow,
   soundon,
   soundoff,
+  python,
+  ml,
+  expo,
+  web,
+  globe,
+  brain,
+  linkedin,
 };

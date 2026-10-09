@@ -1,31 +1,29 @@
 // contains all constants to be used throughout the project
 // dont' remove anything from here if not sure
 
-import { meta, shopify,starbucks,tesla } from "../assets/images";
 import {
   car,
   css,
   estate,
-  express,
+  expo,
   git,
   github,
+  globe,
   html,
   javascript,
+  ml,
   mongodb,
-  motion,
-  mui,
   nextjs,
   nodejs,
+  python,
   react,
-  redux,
-  sass,
   summiz,
   tailwindcss,
   threads,
+  web,
   youtube,
   snappy,
   typescript,
-  
 } from "../assets/icons";
 
 // sidebar links
@@ -50,11 +48,6 @@ export const SKILLS = [
     imageUrl: css,
     name: "CSS",
     type: "Frontend",
-  },
-  {
-    imageUrl: express,
-    name: "Express",
-    type: "Backend",
   },
   {
     imageUrl: git,
@@ -82,16 +75,6 @@ export const SKILLS = [
     type: "Database",
   },
   {
-    imageUrl: motion,
-    name: "Motion",
-    type: "Animation",
-  },
-  {
-    imageUrl: mui,
-    name: "Material-UI",
-    type: "Frontend",
-  },
-  {
     imageUrl: nextjs,
     name: "Next.js",
     type: "Frontend",
@@ -107,16 +90,6 @@ export const SKILLS = [
     type: "Frontend",
   },
   {
-    imageUrl: redux,
-    name: "Redux",
-    type: "State Management",
-  },
-  {
-    imageUrl: sass,
-    name: "Sass",
-    type: "Frontend",
-  },
-  {
     imageUrl: tailwindcss,
     name: "Tailwind CSS",
     type: "Frontend",
@@ -126,6 +99,21 @@ export const SKILLS = [
     name: "TypeScript",
     type: "Frontend",
   },
+  {
+    imageUrl: python,
+    name: "Python",
+    type: "Backend",
+  },
+  {
+    imageUrl: ml,
+    name: "Machine Learning",
+    type: "AI/ML",
+  },
+  {
+    imageUrl: expo,
+    name: "Expo",
+    type: "Mobile",
+  },
 ];
 
 // site name
@@ -134,28 +122,46 @@ export const SITE_NAME = "Ritesh Ganguly";
 // extra links
 export const EXTRA_LINKS = {
   source_code: "https://github.com/ritesh22-oss",
+  linkedin: "https://www.linkedin.com/in/ritesh-ganguly-078103369",
 };
 
 // experiences
 export const EXPERIENCES = [
   {
     title: "Web Developer",
-    date: "March 2023 - April 2024",
-    company_name: "Starbucks",
-    icon: starbucks,
+    date: "March 2023 – Present",
+    company_name: "Web Development",
+    icon: web,
+    iconBg: "#e0f2fe",
     points: [
       "Deepened my understanding of front-end technologies like React.js, JavaScript, and CSS.",
       "Learned how to implement responsive design principles to ensure that web applications work seamlessly across all devices.",
-      "Gained experience in cross-browser compatibility, ensuring that users across different platforms had a consistent experience",
+      "Gained experience in cross-browser compatibility, ensuring that users across different platforms had a consistent experience.",
       "Participated in code reviews, which enhanced my ability to write clean, maintainable code and communicate effectively with team members.",
     ],
   },
   {
+    title: "Machine Learning Engineer",
+    date: "2023 – Present",
+    company_name: "AI & Machine Learning",
+    icon: ml,
+    iconBg: "#ffedd5",
+    points: [
+      "Studied and applied machine learning algorithms to solve practical problems.",
+      "Worked with Python, NumPy, Pandas, and scikit-learn for data processing, analysis, and model development.",
+      "Explored supervised and unsupervised learning techniques.",
+      "Worked on data preprocessing, feature engineering, model training, and evaluation.",
+      "Explored neural networks, deep learning, and AI-based applications.",
+      "Improved model performance through experimentation and evaluation.",
+      "Worked on practical machine learning projects and continuously developed AI/ML skills.",
+    ],
+  },
+  {
     title: "React Native Developer",
-    company_name: "Tesla",
-    icon: tesla,
+    company_name: "Mobile App Development",
+    icon: react,
     iconBg: "#fbc3bc",
-    date: "July 2024 - September 2024",
+    date: "July 2024 – Present",
     points: [
       "Developed expertise in React Native, enabling me to build high-performing cross-platform mobile applications.",
       "Worked on optimizing app performance for mobile devices, a crucial aspect of mobile app development.",
@@ -165,28 +171,15 @@ export const EXPERIENCES = [
   },
   {
     title: "React.js Developer",
-    company_name: "Shopify",
-    icon: shopify,
+    company_name: "Frontend Development",
+    icon: react,
     iconBg: "#b7e4c7",
-    date: "September 2024 - October 2024",
+    date: "September 2024 – Present",
     points: [
       "Gained a deep understanding of React.js and state management tools like Redux.",
       "Worked on implementing complex UI components and optimizing them for performance.",
       "Contributed to building e-commerce features like product listings, shopping carts, and payment integrations.",
       "Developed a keen understanding of how to tailor web applications to provide seamless shopping experiences for end users.",
-    ],
-  },
-  {
-    title: "Full stack Developer",
-    company_name: "Meta",
-    icon: meta,
-    iconBg: "#a2d2ff",
-    date: "October 2024 - Present",
-    points: [
-      "Mastered both front-end and back-end technologies, including React.js, Node.js, Express, and MongoDB.",
-      "Worked on building and deploying full-stack applications, gaining experience in API development, server management, and database integration.",
-      "Focused on creating scalable and secure web applications by following best practices in architecture and security.",
-      "Gained an in-depth understanding of DevOps practices, including continuous integration and deployment (CI/CD).",
     ],
   },
 ];
@@ -240,5 +233,39 @@ export const PROJECTS = [
     description:
       "App that leverages AI to automatically generate concise & informative summaries from lengthy text content, or blogs.",
     link: "https://summise.netlify.app/",
+  },
+];
+
+// testimonials
+export const TESTIMONIALS = [
+  {
+    name: "Alex Rivera",
+    role: "Engineering Lead",
+    organization: "Horizon Tech",
+    category: "Full Stack & Architecture",
+    project: "Modern UI/UX Platform",
+    quote:
+      "Ritesh consistently delivered high-performance frontend solutions with outstanding attention to detail, smooth user workflows, and robust responsive implementations.",
+    impact: "Boosted user retention by 28% and cut interactive load latency in half.",
+  },
+  {
+    name: "Sophia Chen",
+    role: "Product Manager",
+    organization: "Nexura Labs",
+    category: "AI & Machine Learning",
+    project: "Predictive Analytics Pipeline",
+    quote:
+      "A proactive engineer who bridges complex ML pipelines and intuitive interfaces seamlessly. The data preprocessing and model evaluation were thorough and production-ready.",
+    impact: "Delivered accurate predictive scoring with sub-100ms inference API responses.",
+  },
+  {
+    name: "David Miller",
+    role: "Mobile Architect",
+    organization: "Pulse Mobility",
+    category: "React Native & Mobile",
+    project: "Cross-Platform Mobile App",
+    quote:
+      "Ritesh built clean, reusable component hierarchies that worked flawlessly across iOS and Android with smooth 60fps animations and resilient state management.",
+    impact: "Achieved seamless multi-platform parity with zero major crash reports post-launch.",
   },
 ];
